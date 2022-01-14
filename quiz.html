@@ -33,6 +33,7 @@
         background-color: rgb(94, 121, 243); 
         margin: auto;
         color: white;
+        padding: 5px 10px;
     }
     button{
         float:right;
@@ -49,10 +50,11 @@
 
     <div class="div1">
         <div class="div2">Welocme : username</div>
-        <div class="div2">Quiz name</div>
-        <div class="div2">Timer</div>
+        <div class="div2" id="qName">Quiz name</div>
+        <div class="div2" id="timer">Timer</div>
         <div style="clear: both;"></div>
-        <div class="div3">questions
+        <div style="margin: 0px 300px;"><button id="startBtn">Start Quiz</button></div>
+        <div class="div3">
 
             <div id="question">
                 
@@ -60,9 +62,10 @@
             <div id="choices">
 
             </div>
+
         </div>
 
-        <button >Next</button>
+        <button id="btn" style="display: none;">Next</button>
     </div>
     <script src="quiz.js"></script>
     
