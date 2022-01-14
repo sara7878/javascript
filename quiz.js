@@ -45,13 +45,13 @@ function displayQuestion(qNumber) {
     <label for="q${qNumber}" >${Quiz.Questions[qNumber-1].Header}</label>
      </h3>`;
   choices.innerHTML = `
-    <input type="radio" id="male" name="q${qNumber}" value="${Quiz.Questions[qNumber-1].Answers[0]}">
-    <label for="male" >${Quiz.Questions[qNumber-1].Answers[0]}</label><br>
-    <input type="radio" id="male" name="q${qNumber}" value="${Quiz.Questions[qNumber-1].Answers[1]}">
-    <label for="male" >${Quiz.Questions[qNumber-1].Answers[1]}</label><br>
-    <input type="radio" id="male" name="q${qNumber}" value="${Quiz.Questions[qNumber-1].Answers[2]}">
-    <label for="male" >${Quiz.Questions[qNumber-1].Answers[2]}</label><br>
-    <input type="radio" id="male" name="q${qNumber}" value="${Quiz.Questions[qNumber-1].Answers[3]}">
-    <label for="male" >${Quiz.Questions[qNumber-1].Answers[3]}</label><br>`;
+    <input type="radio" name="q${qNumber}" id="q${qNumber},ch0" value="${Quiz.Questions[qNumber-1].Answers[0]}">
+    <label for="q${qNumber},ch0" >${Quiz.Questions[qNumber-1].Answers[0]}</label><br>
+    <input type="radio" name="q${qNumber}" id="q${qNumber},ch1" value="${Quiz.Questions[qNumber-1].Answers[1]}">
+    <label for="q${qNumber},ch1" >${Quiz.Questions[qNumber-1].Answers[1]}</label><br>
+    <input type="radio" name="q${qNumber}" id="q${qNumber},ch2" value="${Quiz.Questions[qNumber-1].Answers[2]}">
+    <label for="q${qNumber},ch2" >${Quiz.Questions[qNumber-1].Answers[2]}</label><br>
+    <input type="radio" name="q${qNumber}" id="q${qNumber},ch3" value="${Quiz.Questions[qNumber-1].Answers[3]}">
+    <label for="q${qNumber},ch3" >${Quiz.Questions[qNumber-1].Answers[3]}</label><br>`;
 }
 displayQuestion(5);
