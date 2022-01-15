@@ -1,5 +1,5 @@
 
-var data={}
+
 
 function validateForm() {
     const username = document.getElementById("username").value;
@@ -9,9 +9,6 @@ function validateForm() {
     const gender1=document.getElementById("male").checked;
     const gender2=document.getElementById("female").checked;
 
-    data.username=username;
-    data.password=password;
-    data.email=email;
 
     if (username == "" ||  /^([a-zA-z]{5,})$/.test(username)==false) {
         document.getElementsByTagName("p")[0].innerText="Username must be string at least 5 characters"
@@ -19,6 +16,7 @@ function validateForm() {
     }
     else{
     document.getElementsByTagName("p")[0].innerText=""
+  
     }
 
     if (password == "" || /^([a-zA-z1-9]{8,})$/.test(password)==false) {
@@ -26,7 +24,8 @@ function validateForm() {
       return false;
     }
     else{
-    document.getElementsByTagName("p")[1].innerText=""
+    document.getElementsByTagName("p")[1].innerText="" 
+
     }
 
     if(confirmpass==""){
@@ -47,7 +46,8 @@ function validateForm() {
     return false;
   }
   else{
-  document.getElementsByTagName("p")[3].innerText=""
+
+    document.getElementsByTagName("p")[3].innerText=""
   }  
   
     if (gender1 == false && gender2 == false) {
@@ -56,9 +56,11 @@ function validateForm() {
     }
     else{
     document.getElementsByTagName("p")[4].innerText=""
-    console.log(gender)
     }
+    
+
+    localStorage.setItem("email",email)
+    localStorage.setItem("password",password)
 
   }
-
-  // module.exports=data;
+  
