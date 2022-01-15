@@ -1,4 +1,4 @@
-import { loginUser } from "./login.js";
+const loginUser = JSON.parse(localStorage.getItem("data"))
 
 const Quiz = {
   QuizName: "JavaScript Quiz",
@@ -55,7 +55,7 @@ const Quiz = {
     },
     {
       Header: "9. What is 3-2 ?",
-      Answers: ["3", "2", "1", "None of the above"],
+      Answers: ["3", "2", "1", "-1"],
       CorrectAnswer: "1",
       Degree: 10,
     },
@@ -69,8 +69,8 @@ const Quiz = {
 };
 
 let score = 0;
-let isSelected = false;
-let selectedAnswer = ""
+// let isSelected = false;
+// let selectedAnswer = ""
 
 const displayResult = () =>{
 	const quizBody = document.querySelector(".div3")
@@ -78,7 +78,7 @@ const displayResult = () =>{
 	const quizFooter = document.querySelector("#q-footer")
 	quizFooter.style.display = "none"
 	const resultDiv = document.querySelector("#result")
-	resultDiv.innerHTML=`Your Result is: ${score}`
+	resultDiv.innerHTML=`Your Result is: ${score}/${Quiz.TotalDegree}`
 	clearInterval(countDown);
 }
 
@@ -154,12 +154,13 @@ nextBtn.addEventListener("click", ()=>{
     let value=nextBtn.getAttribute("value");
     value=parseInt(value);
     // console.log(`value: ${value}`);
+    if(selectedAnswer == Quiz.Questions[value-1].CorrectAnswer)
+    score+=Quiz.Questions[value-1].Degree
+    
     if(value === 10){
         displayResult()
         return
     }
-    if(selectedAnswer == Quiz.Questions[value-1].CorrectAnswer)
-		score+=Quiz.Questions[value-1].Degree
 
     isSelected = false;
 
