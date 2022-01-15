@@ -1,7 +1,9 @@
 
 
+// var data=[];
 
 function validateForm() {
+    var regUser={};
     const username = document.getElementById("username").value;
     const password = document.getElementById("userpass").value;
     const confirmpass = document.getElementById("userpass2").value;
@@ -56,11 +58,15 @@ function validateForm() {
     }
     else{
     document.getElementsByTagName("p")[4].innerText=""
-    }
+    }   
     
+    regUser.username=username;
+    regUser.emaill=email;
+    regUser.password=password;
 
-    localStorage.setItem("email",email)
-    localStorage.setItem("password",password)
+
+    const data =JSON.stringify(regUser);
+    localStorage.setItem("data",data)
 
   }
   
