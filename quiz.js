@@ -1,3 +1,5 @@
+import { loginUser } from "./login.js";
+
 const Quiz = {
   QuizName: "JavaScript Quiz",
   QuizTime: 30,
@@ -82,7 +84,7 @@ const displayResult = () =>{
 
 var sec         = Quiz.QuizTime * 60,
     countDiv    = document.getElementById("timer"),
-    secpass;
+    countDown;
     
 
 function secpass() {
@@ -110,7 +112,7 @@ function secpass() {
     } else {
         
         clearInterval(countDown);
-        
+        displayResult()
         countDiv.innerHTML = 'Time up';
         
     }
@@ -120,10 +122,20 @@ const startBtn = document.getElementById("startBtn");
 const nextBtn = document.getElementById("btn");
 const quizQuestions = document.getElementsByClassName("div3")[0];
 document.getElementById("qName").innerHTML=Quiz.QuizName;
+document.querySelector(".div2").innerHTML=`Welcome: ${loginUser.username}`
 let question = document.getElementById("question");
 let choices = document.getElementById("choices");
 
 startBtn.addEventListener("click", ()=>{
+    const qBody = document.querySelector(".div3")
+    if(loginUser.gender === "male")
+        qBody.style["backgroundColor"] 
+        = nextBtn.style["backgroundColor"] 
+        = "lightblue"
+    else
+        qBody.style["backgroundColor"] 
+        = nextBtn.style["backgroundColor"]
+        = "lightpink"
     countDown   = setInterval(function () {
         'use strict';
         
