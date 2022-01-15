@@ -49,6 +49,15 @@
         input{
             border: 1px solid skyblue;
         }
+        #ms
+        {
+            height: 20px;
+            padding-top: 7px;
+        }
+        #passMessage
+        {
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -64,14 +73,18 @@
                 <div id="pass">
                     <label for="password">User password</label>
                     <input type="password" name="password" id="password" required>
+                   <div id="ms"> <p id="passMessage"></p>
+  
+                   </div>
                 </div>
                 <div id="btn">
-                    <input type="button" value="Ok">
-                    <input type="button" value="Cancel">
+                    <input type="button" value="Ok" id="ok">
+                    <input type="button" value="Cancel" id="cancel">
                 </div>
             </fieldset>
         </form>
     </section>
     <footer></footer>
+    <script src="./login.js"></script>
 </body>
 </html>
