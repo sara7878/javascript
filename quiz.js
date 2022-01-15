@@ -66,7 +66,21 @@ const Quiz = {
   ],
 };
 
-var sec         = 1800,
+let score = 0;
+let isSelected = false;
+let selectedAnswer = ""
+
+const displayResult = () =>{
+	const quizBody = document.querySelector(".div3")
+	quizBody.style.display = "none"
+	const quizFooter = document.querySelector("#q-footer")
+	quizFooter.style.display = "none"
+	const resultDiv = document.querySelector("#result")
+	resultDiv.innerHTML=`Your Result is: ${score}`
+	clearInterval(countDown);
+}
+
+var sec         = Quiz.QuizTime * 60,
     countDiv    = document.getElementById("timer"),
     secpass;
     
@@ -97,13 +111,17 @@ function secpass() {
         
         clearInterval(countDown);
         
-        countDiv.innerHTML = 'countdown done';
+        countDiv.innerHTML = 'Time up';
         
     }
 }
 
 const startBtn = document.getElementById("startBtn");
 const nextBtn = document.getElementById("btn");
+const quizQuestions = document.getElementsByClassName("div3")[0];
+document.getElementById("qName").innerHTML=Quiz.QuizName;
+let question = document.getElementById("question");
+let choices = document.getElementById("choices");
 
 startBtn.addEventListener("click", ()=>{
     countDown   = setInterval(function () {
@@ -119,41 +137,54 @@ startBtn.addEventListener("click", ()=>{
 });
 
 nextBtn.addEventListener("click", ()=>{
+    if(!isSelected)
+		return
     let value=nextBtn.getAttribute("value");
     value=parseInt(value);
     // console.log(`value: ${value}`);
-    if(value<9){
-        //console.log(typeof value);
-        nextBtn.setAttribute("value",`${value+1}`);
-        displayQuestion(value+1);
-       
-    }else{
-        displayQuestion(10);
-        nextBtn.innerHTML="Finish";
-        
+    if(value === 10){
+        displayResult()
+        return
     }
+    if(selectedAnswer == Quiz.Questions[value-1].CorrectAnswer)
+		score+=Quiz.Questions[value-1].Degree
+
+    isSelected = false;
+
+    if(value>9){
+        //console.log(typeof value);
+        nextBtn.innerHTML="Finish";
+    }
+    nextBtn.setAttribute("value",`${value+1}`);
+    displayQuestion(value+1);
     
 });
 
-const quizQuestions = document.getElementsByClassName("div3")[0];
-document.getElementById("qName").innerHTML=Quiz.QuizName;
-let question = document.getElementById("question");
-let choices = document.getElementById("choices");
 
 function displayQuestion(qNumber) {
 
     question.innerHTML = `<h3> 
         <label for="q${qNumber}" > ${Quiz.Questions[qNumber-1].Header} </label>
         </h3>`;
-    choices.innerHTML = 
-        `<input type="radio" name="q${qNumber}" id="q${qNumber},ch0" value="${Quiz.Questions[qNumber-1].Answers[0]}">
-        <label for="q${qNumber},ch0" >${Quiz.Questions[qNumber-1].Answers[0]}</label><br>
-        <input type="radio" name="q${qNumber}" id="q${qNumber},ch1" value="${Quiz.Questions[qNumber-1].Answers[1]}">
-        <label for="q${qNumber},ch1" >${Quiz.Questions[qNumber-1].Answers[1]}</label><br>
-        <input type="radio" name="q${qNumber}" id="q${qNumber},ch2" value="${Quiz.Questions[qNumber-1].Answers[2]}">
-        <label for="q${qNumber},ch2" >${Quiz.Questions[qNumber-1].Answers[2]}</label><br>
-        <input type="radio" name="q${qNumber}" id="q${qNumber},ch3" value="${Quiz.Questions[qNumber-1].Answers[3]}">
-        <label for="q${qNumber},ch3" >${Quiz.Questions[qNumber-1].Answers[3]}</label><br>`;  
+    choices.innerHTML=""
+    // let choicesLiteral = ""
+    for(let i=0;i<Quiz.Questions[qNumber-1].Answers.length;i++){
+        choices.innerHTML += 
+        `<input type="radio" name="q${qNumber}" id="q-ch-${i}" value="${Quiz.Questions[qNumber-1].Answers[i]}" onclick="isSelected = true;selectedAnswer =${Quiz.Questions[qNumber-1].Answers[i]}">
+        <label for="q-ch-${i}" >${Quiz.Questions[qNumber-1].Answers[i]}</label><br>`
+        
+    }
+    // console.log(choicesLiteral);
+    // choices.innerHTML=choicesLiteral
+    // choices.innerHTML = 
+    //     `<input type="radio" name="q${qNumber}" id="q${qNumber},ch0" value="${Quiz.Questions[qNumber-1].Answers[0]}">
+    //     <label for="q${qNumber},ch0" >${Quiz.Questions[qNumber-1].Answers[0]}</label><br>
+    //     <input type="radio" name="q${qNumber}" id="q${qNumber},ch1" value="${Quiz.Questions[qNumber-1].Answers[1]}">
+    //     <label for="q${qNumber},ch1" >${Quiz.Questions[qNumber-1].Answers[1]}</label><br>
+    //     <input type="radio" name="q${qNumber}" id="q${qNumber},ch2" value="${Quiz.Questions[qNumber-1].Answers[2]}">
+    //     <label for="q${qNumber},ch2" >${Quiz.Questions[qNumber-1].Answers[2]}</label><br>
+    //     <input type="radio" name="q${qNumber}" id="q${qNumber},ch3" value="${Quiz.Questions[qNumber-1].Answers[3]}">
+    //     <label for="q${qNumber},ch3" >${Quiz.Questions[qNumber-1].Answers[3]}</label><br>`;  
 
 }
 
