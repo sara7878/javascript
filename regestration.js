@@ -51,19 +51,24 @@ function validateForm() {
 
     document.getElementsByTagName("p")[3].innerText=""
   }  
-  
-    if (gender1 == false && gender2 == false) {
-        document.getElementsByTagName("p")[4].innerText="please your gender"
-      return false;
-    }
-    else{
-    document.getElementsByTagName("p")[4].innerText=""
-    }   
-    
+      
     regUser.username=username;
     regUser.emaill=email;
     regUser.password=password;
 
+    if (gender1 == false && gender2 == false) {
+        document.getElementsByTagName("p")[4].innerText="please your gender"
+      return false;
+    }
+    else if(gender1 == true){
+      regUser.gender="male";
+      document.getElementsByTagName("p")[4].innerText=""
+      }       
+    else if(gender2 == true){
+        regUser.gender="female";
+        document.getElementsByTagName("p")[4].innerText=""
+        }   
+    
 
     const data =JSON.stringify(regUser);
     localStorage.setItem("data",data)
