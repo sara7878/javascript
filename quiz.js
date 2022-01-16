@@ -69,8 +69,6 @@ const Quiz = {
 };
 
 let score = 0;
-// let isSelected = false;
-// let selectedAnswer = ""
 
 const displayResult = () =>{
 	const quizBody = document.querySelector(".div3")
@@ -153,7 +151,7 @@ nextBtn.addEventListener("click", ()=>{
 		return
     let value=nextBtn.getAttribute("value");
     value=parseInt(value);
-    // console.log(`value: ${value}`);
+    
     if(selectedAnswer == Quiz.Questions[value-1].CorrectAnswer)
     score+=Quiz.Questions[value-1].Degree
     
@@ -164,8 +162,7 @@ nextBtn.addEventListener("click", ()=>{
 
     isSelected = false;
 
-    if(value>9){
-        //console.log(typeof value);
+    if(value === 9){
         nextBtn.innerHTML="Finish";
     }
     nextBtn.setAttribute("value",`${value+1}`);
@@ -187,17 +184,7 @@ function displayQuestion(qNumber) {
         <label for="q-ch-${i}" >${Quiz.Questions[qNumber-1].Answers[i]}</label><br>`
         
     }
-    // console.log(choicesLiteral);
-    // choices.innerHTML=choicesLiteral
-    // choices.innerHTML = 
-    //     `<input type="radio" name="q${qNumber}" id="q${qNumber},ch0" value="${Quiz.Questions[qNumber-1].Answers[0]}">
-    //     <label for="q${qNumber},ch0" >${Quiz.Questions[qNumber-1].Answers[0]}</label><br>
-    //     <input type="radio" name="q${qNumber}" id="q${qNumber},ch1" value="${Quiz.Questions[qNumber-1].Answers[1]}">
-    //     <label for="q${qNumber},ch1" >${Quiz.Questions[qNumber-1].Answers[1]}</label><br>
-    //     <input type="radio" name="q${qNumber}" id="q${qNumber},ch2" value="${Quiz.Questions[qNumber-1].Answers[2]}">
-    //     <label for="q${qNumber},ch2" >${Quiz.Questions[qNumber-1].Answers[2]}</label><br>
-    //     <input type="radio" name="q${qNumber}" id="q${qNumber},ch3" value="${Quiz.Questions[qNumber-1].Answers[3]}">
-    //     <label for="q${qNumber},ch3" >${Quiz.Questions[qNumber-1].Answers[3]}</label><br>`;  
+   
 
 }
 
